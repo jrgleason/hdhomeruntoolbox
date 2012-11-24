@@ -1,0 +1,131 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.lafaspot.hdhomeurntoolbox</groupId>
+	<artifactId>hdhomeurntoolbox-core</artifactId>
+	<version>0.1.10-SNAPSHOT</version>
+
+	<name>HDHomeRun Toolbox</name>
+	<description>Small utility to create my channel data to use with xbmc.
+	</description>
+	<url>http://code.google.com/p/hdhomeruntoolbox/</url>
+
+	<issueManagement>
+		<url>http://code.google.com/p/hdhomeruntoolbox/issues/list</url>
+	</issueManagement>
+
+	<!-- SUBVERSION (SOURCE) REPOSITORY -->
+	<scm>
+		<connection>scm:svn:https://hdhomeruntoolbox.googlecode.com/svn/trunk</connection>
+		<developerConnection>scm:svn:https://hdhomeruntoolbox.googlecode.com/svn/trunk</developerConnection>
+		<url>https://hdhomeruntoolbox.googlecode.com/svn/trunk</url>
+	</scm>
+
+	<organization>
+		<name>lafaspot</name>
+		<url>www.lafaspot.com</url>
+	</organization>
+
+	<!-- MAVEN DEPLOYMENT REPOSITORY -->
+	<distributionManagement>
+		<!-- use the following if you're not using a snapshot version. -->
+		<repository>
+			<id>localhost.lafaspot</id>
+			<name>OSS LafaSpot</name>
+			<url>scp://localhost/home/lafa/maven_test_repo</url>
+		</repository>
+		<!-- use the following if you ARE using a snapshot version. -->
+		<snapshotRepository>
+			<id>localhost.lafaspot</id>
+			<name>OSS LafaSpot</name>
+			<url>scp://localhost/home/lafa/maven_test_repo</url>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<properties>
+		<jar.mainClass>com.lafaspot.hdhomerun.CreateSTRM</jar.mainClass>
+		<jar.packageName>com.lafaspot.hdhomerun</jar.packageName>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>5.14.2</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>2.6</version>
+					<configuration>
+						<disableXmlReport>true</disableXmlReport>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>2.1</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>2.3.2</version>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-gpg-plugin</artifactId>
+					<executions>
+						<execution>
+							<id>sign-artifacts</id>
+							<phase>verify</phase>
+							<goals>
+								<goal>sign</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>2.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<mainClass>${jar.mainClass}</mainClass>
+							<packageName>${jar.packageName}</packageName>
+						</manifest>
+						<manifestEntries>
+							<mode>development</mode>
+							<url>${pom.url}</url>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
