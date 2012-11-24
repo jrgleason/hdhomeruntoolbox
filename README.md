@@ -10,7 +10,7 @@ Default (local ip, tuner1)
 java -jar hdhomeurntoolbox-core-0.1.10-SNAPSHOT.jar
 
 Declare IP (local/remote IP, tuner)
-java -jar hdhomeurntoolbox-core-0.1.10-SNAPSHOT.jar <ip> <tuner>
+java -jar hdhomeurntoolbox-core-0.1.10-SNAPSHOT.jar \<ip\> <tuner>
 
 
 License
