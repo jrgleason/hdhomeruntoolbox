@@ -42,6 +42,7 @@ public class HDHomeRunTunner {
 	}
 
         public HDHomeRunTunner(int tuner, String ip) {
+                System.out.println("In here");
                 File file = new File(dir);
                 file.mkdirs();
                 mTuner = tuner;
@@ -52,6 +53,7 @@ public class HDHomeRunTunner {
 	public void playStream(String channel, String program){
 		File file = new File(dir, filterFileName("stream_tuner" + mTuner + ".ts"));
 		if (file.exists()) {
+                        System.out.println("File Exisists");
 			file.delete();
 			String output = exec(String.format(CMD_MKFIFO, file.toString()));
 			log.info(output);
@@ -82,11 +84,7 @@ public class HDHomeRunTunner {
 	}
        
         private String readDeviceId(String ip){
-                String[] parsed = null;
-                String temp = exec(String.format(CMD_DISCOVER_EXT, ip));
-                System.out.println("The response is..." +temp);
-                parsed = temp.split(" ");
-                return parsed[2];        
+                return ip;        
         }
 
 	public void createSTRMFile(String directory, Filter filter) {
@@ -128,12 +126,17 @@ public class HDHomeRunTunner {
 	
 	private void readScan() {
 		try {
+                        System.out.println("Filename is "+dir + File.separator
+                                        + String.format(scanFile, mTuner));
 			File file = new File(dir + File.separator
 					+ String.format(scanFile, mTuner));
 			String scan = null;
 			if (file.exists()) {
+                                System.out.println("File Exists");
 				scan = readFile(file);
 			} else {
+                                System.out.println("Not created");
+                                file.createNewFile();
 				String output = exec(String.format(CMD_SCAN, mId, mTuner, file.toString()));
 				log.info(output);
 				scan = readFile(file);
@@ -188,6 +191,7 @@ public class HDHomeRunTunner {
 		StringBuffer buff = new StringBuffer();
 
 		try {
+                        
 			fis = new FileReader(file);
 
 			// Here BufferedInputStream is added for fast reading.

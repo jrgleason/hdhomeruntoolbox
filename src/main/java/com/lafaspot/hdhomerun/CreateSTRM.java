@@ -16,9 +16,12 @@ public class CreateSTRM {
                 Integer tunerInt = new Integer(args[1]);
                 tuner = tunerInt.intValue();
           }
-          HDHomeRunTunner config = new HDHomeRunTunner(tuner);
+          HDHomeRunTunner config = null;
           if(args[0] != null){
             config = new HDHomeRunTunner(tuner,args[0]);
+          }
+          else{
+            config = new HDHomeRunTunner(tuner);            
           }
 	  config.createSTRMFile(dir, Filter.ENCRYPTED);
 	  log.info("strm files available at '" + dir + "'");
