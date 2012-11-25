@@ -17,7 +17,7 @@ public class CreateSTRM {
                 tuner = tunerInt.intValue();
           }
           HDHomeRunTunner config = null;
-          if(args[0] != null){
+          if(args.length > 0 && args[0] != null){
             config = new HDHomeRunTunner(tuner,args[0]);
           }
           else{
